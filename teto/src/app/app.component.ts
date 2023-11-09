@@ -5,18 +5,18 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   boolets = []
-  lol(ineedmoreboolets: HTMLInputElement, http: HttpClient) {
-    console.log(ineedmoreboolets.value);
+  constructor(private http: HttpClient) {
+
+  }
+  lol(ineedmoreboolets: HTMLInputElement) {
+    this.boolets = []
     //@ts-ignore
-    
-    http.get("https://tetr.io/about/api/users" + ineedmoreboolets.value).subscribe(boolet => this.boolets.push(boolet))
+    this.http.get("https://cors-anywhere.herokuapp.com/https://ch.tetr.io/api/users/" + ineedmoreboolets.value).subscribe(boolet => this.boolets.push(boolet))
   }
 
 }
