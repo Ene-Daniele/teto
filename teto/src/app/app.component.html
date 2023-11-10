@@ -1,5 +1,24 @@
 <!-- https://tetr.io/about/api/ -->
-<input type="text" style="width: 100%;" #ineedmoreboolets (change)="lol(ineedmoreboolets)">
-<h4>
-  {{boolets | json}}
-</h4>
+<div style="display: flex; margin-top: -2%;">
+  <img src="https://static-00.iconduck.com/assets.00/tetrio-desktop-icon-2048x2048-6n8mfzbg.png" style="width: 7%; margin: 10px; border-radius: 0%;" alt="">
+  <h1>TETR.IO Stat Viewer</h1>
+</div>
+<p>Insert a player's name to see their stats</p>
+<div style="display: flex;">
+  <input type="text" style="width: 80%;" #ineedmoreboolets (change)="lol(ineedmoreboolets)"> 
+  <button style="width: 20%;">Search</button>
+</div>
+<div style="overflow-y: scroll; height: 70vh; margin-top: 30px; width: 160%; margin-left: -30%; border: 1px solid red;">
+
+  <h4>
+    {{boolets | json}}
+  </h4>
+
+  <div *ngFor = "let b of boolets.">
+
+  </div>
+</div>
+
+<footer style="border: none; text-align: center;">
+  <p>Why should you use this over <a href="https://tetrio.team2xh.net/?">TETRIO Statistics by Tenchi</a> or <a href="https://ch.tetr.io/players/">TETRA CHANNEL</a>? You shouldnt.</p>
+</footer>

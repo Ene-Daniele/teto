@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Root } from './models';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   lol(ineedmoreboolets: HTMLInputElement) {
     this.boolets = []
     //@ts-ignore
-    this.http.get("https://cors-anywhere.herokuapp.com/https://ch.tetr.io/api/users/" + ineedmoreboolets.value).subscribe(boolet => this.boolets.push(boolet))
+    this.http.get<Root>("https://cors-anywhere.herokuapp.com/https://ch.tetr.io/api/users/" + ineedmoreboolets.value).subscribe(boolet => this.boolets.push(boolet))
   }
 
 }
