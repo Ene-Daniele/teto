@@ -9,14 +9,23 @@
   <button style="width: 20%;">Search</button>
 </div>
 <div style="overflow-y: scroll; height: 70vh; margin-top: 30px; width: 160%; margin-left: -30%; border: 1px solid red;">
-
-  <h4>
-    {{boolets | json}}
-  </h4>
-
-  <div *ngFor = "let b of boolets.">
+  
+  <div *ngIf="boolets.error === undefined && once" style="border: 1px solid red; min-width: 99%; height: 99%; text-align: center;"><h1>Nothing to search yet</h1></div>
+  <ng-template #elseBlock> 
+    <div style="border: 1px solid red; min-width: 99%; height: 99%; text-align: center;">
+      <h1>
+        {{boolets.error.replace("|", "")}}
+      </h1>
+    </div> 
+  </ng-template>
+  <div *ngIf="boolets.success; else elseBlock">
+  
+    <div style="width: 30%;">
+      <h1>{{user | json}}</h1>
+    </div>
 
   </div>
+
 </div>
 
 <footer style="border: none; text-align: center;">

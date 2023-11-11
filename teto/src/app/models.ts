@@ -2,6 +2,7 @@ export type Root = Root2[]
 
 export interface Root2 {
   success: boolean
+  error: string
   data: Data
   cache: Cache
 }
