@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Root, Root2, User } from './models';
+import { Root, Root2, RootBeer, User } from './models';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +10,12 @@ import { Root, Root2, User } from './models';
 export class AppComponent {
   //@ts-ignore
   boolets: Root2 = {}
+  //@ts-ignore
+  recs: RootBeer = {}
   once: boolean = true;
   //@ts-ignore
   user: User = {}
+  fourty = {}
   constructor(private http: HttpClient) {
 
   }
@@ -28,7 +29,9 @@ export class AppComponent {
       this.user = this.boolets.data.user;
       this.once = false; 
     })
-    
+    this.http.get<RootBeer>("https://cors-anywhere.herokuapp.com/https://ch.tetr.io/api/users/" + ineedmoreboolets.value + "/records").subscribe(a => {
+      this.recs = a;
+    })
   }
 
 }

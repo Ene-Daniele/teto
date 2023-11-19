@@ -3,26 +3,96 @@
   <img src="https://static-00.iconduck.com/assets.00/tetrio-desktop-icon-2048x2048-6n8mfzbg.png" style="width: 7%; margin: 10px; border-radius: 0%;" alt="">
   <h1>TETR.IO Stat Viewer</h1>
 </div>
-<p>Insert a player's name to see their stats</p>
+<p>Insert a player's name to see their stats, go <a href="https://cors-anywhere.herokuapp.com/corsdemo">here</a> and request access first!</p>
 <div style="display: flex;">
   <input type="text" style="width: 80%;" #ineedmoreboolets (change)="lol(ineedmoreboolets)"> 
   <button style="width: 20%;">Search</button>
 </div>
-<div style="overflow-y: scroll; height: 70vh; margin-top: 30px; width: 160%; margin-left: -30%; border: 1px solid red;">
+<div style="overflow-y: scroll; height: 70vh; margin-top: 30px;">
   
-  <div *ngIf="boolets.error === undefined && once" style="border: 1px solid red; min-width: 99%; height: 99%; text-align: center;"><h1>Nothing to search yet</h1></div>
+  <div *ngIf="boolets.error === undefined && once" style="min-width: 99%; height: 99%; text-align: center;"><h1>Nothing to search yet</h1></div>
   <ng-template #elseBlock> 
-    <div style="border: 1px solid red; min-width: 99%; height: 99%; text-align: center;">
+    <div style="min-width: 99%; height: 99%; text-align: center;">
       <h1>
         {{boolets.error.replace("|", "")}}
       </h1>
     </div> 
   </ng-template>
-  <div *ngIf="boolets.success; else elseBlock">
+  <div *ngIf="boolets.success; else elseBlock" style="display: flex;">
   
-    <div style="width: 30%;">
-      <h1>{{user | json}}</h1>
+    <div style="width: 35%; margin: 1%;">
+      <h1>{{user.username.toUpperCase()}}</h1>
+      <div>
+        <h3>Data</h3>
+        <p style="margin-left: 5px;">
+          Games played: {{user.gamesplayed}} <br>
+          Games won: {{user.gameswon}} <br>
+          Country: {{user.country}} <br>
+          Bio: {{user.bio}} <br>
+          Friends: {{user.friend_count}} <br>
+          Joined: {{user.ts.split("T")[0]}} <br>
+        </p>
+        <h3>Badges</h3>
+        <p *ngFor="let item of user.badges" style="margin-left: 5px; margin-top: 0px; margin-bottom: 0px;">
+          {{item.id}}
+        </p>
+      </div>
     </div>
+
+    <div style="width: max-content; border-left: 2px solid #474940; padding-left: 10px; margin: 1%;">
+      <h1>TETRA LEAGUE</h1>
+      <div style="display: flex;">
+        <div>
+          <h3 style="margin-bottom: 0px;">Ranks</h3>
+          <div style="display: flex;">
+            <h3 style="color: gray; margin: 0px;">{{user.league.prev_rank}} <span style="color: yellowgreen; font-size: 200%;">{{user.league.rank}}</span> {{user.league.next_rank}}</h3>
+          </div>
+          <p style="margin-left: 5px;">
+            Global: {{user.league.standing}} <br>
+            Country: {{user.league.standing_local}} <br>
+            TR: {{user.league.rating.toPrecision(7)}} <br>
+            Games played: {{user.league.gamesplayed}} <br>
+            Games won: {{user.league.gameswon}} <br>
+          </p>
+        </div>
+        <div style="margin-left: 50px;">
+          <h3>Stats</h3>
+          <p style="margin-left: 5px;">
+            Attack per minute: {{user.league.apm}} <br>
+            Pieces per second: {{user.league.pps}} <br>
+            Versus: {{user.league.vs}} <br>
+            Glicko: {{user.league.glicko.toPrecision(6)}} <br>
+            Rating deviation: {{user.league.rd.toPrecision(4)}} <br>
+          </p>
+        </div>
+      </div>
+        <div style="display: flex;">
+          <div>
+            <h1>40 LINES</h1>
+            <p>
+              Time: {{recs.data.records['40l'].record.endcontext.finalTime/1000}} <br>
+              Finesse faults: {{recs.data.records['40l'].record.endcontext.finesse.faults}} <br>
+              Holds: {{recs.data.records['40l'].record.endcontext.holds}} <br>
+              Inputs: {{recs.data.records['40l'].record.endcontext.inputs}} <br>
+              Pieces placed: {{recs.data.records['40l'].record.endcontext.piecesplaced}} <br>
+              T-spins: {{recs.data.records['40l'].record.endcontext.tspins}} <br>
+            </p>
+          </div>
+          <div style="margin-left: 50px;">
+            <h1>BLITZ</h1>
+            <p>
+              Score: {{recs.data.records.blitz.record.endcontext.score}} <br>
+              Finesse faults: {{recs.data.records.blitz.record.endcontext.finesse.faults}} <br>
+              Holds: {{recs.data.records.blitz.record.endcontext.holds}} <br>
+              Inputs: {{recs.data.records.blitz.record.endcontext.inputs}} <br>
+              Pieces placed: {{recs.data.records.blitz.record.endcontext.piecesplaced}} <br>
+              T-spins: {{recs.data.records.blitz.record.endcontext.tspins}} <br>
+              Top combo: {{recs.data.records.blitz.record.endcontext.topcombo}} <br>
+              Top back to back: {{recs.data.records.blitz.record.endcontext.topbtb}} <br>
+            </p>
+          </div>
+        </div>
+      </div>
 
   </div>
 
